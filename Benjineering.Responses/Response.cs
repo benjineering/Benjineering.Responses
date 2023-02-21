@@ -1,4 +1,6 @@
-﻿namespace Benjineering.Responses;
+﻿using Benjineering.Responses.Errors;
+
+namespace Benjineering.Responses;
 
 public record Response : IResponse
 {
@@ -8,13 +10,16 @@ public record Response : IResponse
 
     public string Message { get; init; }
 
-    public IList<object> ErrorData { get; init; }
+    public Error[] Errors { get; init; }
 
-    public Response(ResponseType type, string message, IList<object>? errorData = null)
+    public ValidationError[] ValidationErrors { get; init; }
+
+    public Response(ResponseType type, string message, Error[]? errors = null, ValidationError[]? validationErrors = null)
     {
         Type = type;
         Message = message;
-        ErrorData = errorData ?? Array.Empty<object>();
+        Errors = errors ?? Array.Empty<Error>();
+        ValidationErrors = validationErrors ?? Array.Empty<ValidationError>();
     }
 
     public static Response Success()
@@ -27,39 +32,39 @@ public record Response : IResponse
         return new Response<T>(ResponseType.Success, "Ok", content);
     }
 
-    public static Response Error(string message, IList<object>? errorData = null)
+    public static Response Error(string message, Error[]? errors = null)
     {
-        return new Response(ResponseType.Error, message, errorData);
+        return new Response(ResponseType.Error, message, errors);
     }
 
-    public static Response<T> Error<T>(string message, IList<object>? errorData = null)
+    public static Response<T> Error<T>(string message, Error[]? errors = null)
     {
-        return new Response<T>(ResponseType.Error, message, errorData);
+        return new Response<T>(ResponseType.Error, message, errors);
     }
 
-    public static Response NotFound(string message, IList<object>? errorData = null)
+    public static Response NotFound(string message, Error[]? errors = null)
     {
-        return new Response(ResponseType.NotFound, message, errorData);
+        return new Response(ResponseType.NotFound, message, errors);
     }
 
-    public static Response<T> NotFound<T>(string message, IList<object>? errorData = null)
+    public static Response<T> NotFound<T>(string message, Error[]? errors = null)
     {
-        return new Response<T>(ResponseType.NotFound, message, errorData);
+        return new Response<T>(ResponseType.NotFound, message, errors);
     }
 
-    public static Response BadRequest(string message, IList<object>? errorData = null)
+    public static Response BadRequest(string message, ValidationError[]? validationErrors = null)
     {
-        return new Response(ResponseType.BadRequest, message, errorData);
+        return new Response(ResponseType.BadRequest, message, errors: null, validationErrors);
     }
 
-    public static Response<T> BadRequest<T>(string message, IList<object>? errorData = null)
+    public static Response<T> BadRequest<T>(string message, ValidationError[]? validationErrors = null)
     {
-        return new Response<T>(ResponseType.BadRequest, message, errorData);
+        return new Response<T>(ResponseType.BadRequest, message, errors: null, validationErrors);
     }
 
     public static Response<T> FromResponse<T>(IResponse response)
     {
-        return new Response<T>(response.Type, response.Message, response.ErrorData);
+        return new Response<T>(response.Type, response.Message, response.Errors, response.ValidationErrors);
     }
 }
 
@@ -67,11 +72,11 @@ public record Response<T> : Response, IResponse<T>
 {
     public T? Content { get; init; }
 
-    public Response(ResponseType type, string message, IList<object>? errorData = null)
-        : base(type, message, errorData) { }
+    public Response(ResponseType type, string message, Error[]? errors = null, ValidationError[]? validationErrors = null)
+        : base(type, message, errors, validationErrors) { }
 
-    public Response(ResponseType type, string message, T content, IList<object>? errorData = null) 
-        : base(type, message, errorData)
+    public Response(ResponseType type, string message, T content, Error[]? errors = null, ValidationError[]? validationErrors = null) 
+        : base(type, message, errors, validationErrors)
     {
         Content = content;
     }

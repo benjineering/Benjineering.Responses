@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benjineering.Responses", "Benjineering.Responses\Benjineering.Responses.csproj", "{5220094D-AEE5-4122-BD88-687C4FC050E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benjineering.Responses", "Benjineering.Responses\Benjineering.Responses.csproj", "{5220094D-AEE5-4122-BD88-687C4FC050E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A56A5614-7AB2-433F-8CF0-8AE3924D9761}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benjineering.Responses.Mvc", "Benjineering.Responses.Mvc\Benjineering.Responses.Mvc.csproj", "{CE56B3F1-EE0C-4FA9-B941-B3C886EDC643}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5220094D-AEE5-4122-BD88-687C4FC050E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5220094D-AEE5-4122-BD88-687C4FC050E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5220094D-AEE5-4122-BD88-687C4FC050E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE56B3F1-EE0C-4FA9-B941-B3C886EDC643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE56B3F1-EE0C-4FA9-B941-B3C886EDC643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE56B3F1-EE0C-4FA9-B941-B3C886EDC643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE56B3F1-EE0C-4FA9-B941-B3C886EDC643}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

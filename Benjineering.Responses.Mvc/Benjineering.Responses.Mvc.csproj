@@ -4,20 +4,28 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<Version>1.0.0</Version>
+		<Version>0.1.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<Authors>Ben Williams</Authors>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageDescription>Simple response classes.</PackageDescription>
+		<PackageDescription>MVC utilities for simple response classes.</PackageDescription>
 		<RepositoryUrl>https://github.com/benjineering/Benjineering.Responses</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="../LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
 		<None Include="../README.md" Pack="true" PackagePath="README.md" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Benjineering.Responses\Benjineering.Responses.csproj" />
 	</ItemGroup>
 
 </Project>

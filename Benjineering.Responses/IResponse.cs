@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Benjineering.Responses.Errors;
 using Benjineering.Responses.JsonConverters;
 
 namespace Benjineering.Responses;
@@ -12,7 +13,9 @@ public interface IResponse
     
     string Message { get; }
 
-    IList<object> ErrorData { get; }
+    Error[] Errors { get; }
+
+    ValidationError[] ValidationErrors { get; }
 }
 
 [JsonConverter(typeof(IResponseJsonConverterFactory))]
