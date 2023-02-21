@@ -1,9 +1,12 @@
 ﻿using Benjineering.Responses.Errors;
+using Benjineering.Responses.Exceptions;
 
 namespace Benjineering.Responses;
 
 public record Response : IResponse
 {
+    public const string DefaultBadRequestMessage = "Invalid";
+
     public ResponseType Type { get; init; }
 
     public bool IsOk => Type == ResponseType.Success;
@@ -62,9 +65,35 @@ public record Response : IResponse
         return new Response<T>(ResponseType.BadRequest, message, errors: null, validationErrors);
     }
 
+    public static Response BadRequest(string propertyName, string errorMessage)
+    {
+        var validationErrors = new[]
+        {
+            ValidationError.Create(propertyName, errorMessage),
+        };
+
+        return new Response(ResponseType.BadRequest, DefaultBadRequestMessage, errors: null, validationErrors);
+    }
+
+    public static Response<T> BadRequest<T>(string propertyName, string errorMessage)
+    {
+        var validationErrors = new[]
+        {
+            ValidationError.Create(propertyName, errorMessage),
+        };
+
+        return new Response<T>(ResponseType.BadRequest, DefaultBadRequestMessage, errors: null, validationErrors);
+    }
+
     public static Response<T> FromResponse<T>(IResponse response)
     {
         return new Response<T>(response.Type, response.Message, response.Errors, response.ValidationErrors);
+    }
+
+    public void EnsureSuccess()
+    {
+        if (!IsOk)
+            throw new ResponseException(this);
     }
 }
 
