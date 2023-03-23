@@ -16,6 +16,9 @@ public interface IResponse
     Error[] Errors { get; }
 
     ValidationError[] ValidationErrors { get; }
+
+    /// <exception cref="ResponseException"></exception>
+    void EnsureSuccess(string? message = null);
 }
 
 [JsonConverter(typeof(IResponseJsonConverterFactory))]

@@ -90,10 +90,10 @@ public record Response : IResponse
         return new Response<T>(response.Type, response.Message, response.Errors, response.ValidationErrors);
     }
 
-    public void EnsureSuccess()
+    public void EnsureSuccess(string? message)
     {
         if (!IsOk)
-            throw new ResponseException(this);
+            throw new ResponseException(this, message);
     }
 }
 
