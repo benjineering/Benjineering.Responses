@@ -85,6 +85,26 @@ public record Response : IResponse
         return new Response<T>(ResponseType.BadRequest, DefaultBadRequestMessage, errors: null, validationErrors);
     }
 
+    public static Response NotSignedIn(string message)
+    {
+        return new Response(ResponseType.NotSignedIn, message);
+    }
+
+    public static Response<T> NotSignedIn<T>(string message)
+    {
+        return new Response<T>(ResponseType.NotSignedIn, message);
+    }
+
+    public static Response NotPermitted(string message)
+    {
+        return new Response(ResponseType.NotPermitted, message);
+    }
+
+    public static Response<T> NotPermitted<T>(string message)
+    {
+        return new Response<T>(ResponseType.NotPermitted, message);
+    }
+
     public static Response<T> FromResponse<T>(IResponse response)
     {
         return new Response<T>(response.Type, response.Message, response.Errors, response.ValidationErrors);

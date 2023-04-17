@@ -5,5 +5,7 @@ public enum ResponseType
     Success,
     Error,
     NotFound,
-    BadRequest
+    BadRequest,
+    NotSignedIn,
+    NotPermitted,
 }

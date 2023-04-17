@@ -17,6 +17,8 @@ public static class IResponseExtensions
             ResponseType.Error => HttpStatusCode.InternalServerError,
             ResponseType.NotFound => HttpStatusCode.NotFound,
             ResponseType.BadRequest => HttpStatusCode.BadRequest,
+            ResponseType.NotSignedIn => HttpStatusCode.Unauthorized,
+            ResponseType.NotPermitted => HttpStatusCode.Forbidden,
             _ => throw new NotImplementedException()
         };
     }
