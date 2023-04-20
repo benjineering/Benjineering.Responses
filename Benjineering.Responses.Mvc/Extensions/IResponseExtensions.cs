@@ -29,4 +29,10 @@ public static class IResponseExtensions
         result.StatusCode = (int)response.ToStatusCode();
         return result;
     }
+
+    public static ActionResult ToEmptyActionResult<T>(this IResponse<T> response)
+    {
+        var statusCode = response.IsOk ? HttpStatusCode.NoContent : response.ToStatusCode();
+        return new StatusCodeResult((int)statusCode);
+    }
 }
