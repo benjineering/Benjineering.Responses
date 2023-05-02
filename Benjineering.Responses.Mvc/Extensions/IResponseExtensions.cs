@@ -7,12 +7,12 @@ namespace Benjineering.Responses.Mvc.Extensions;
 
 public static class IResponseExtensions
 {
-    public static ActionResult ToActionResult(this IResponse response)
+    public static ActionResult ToActionResult(this IResponse response, string? errorMessageOverride = null)
     {
         if (response.IsOk)
             return new StatusCodeResult((int)HttpStatusCode.NoContent);
 
-        var error = new ErrorResultContent(response);
+        var error = new ErrorResultContent(response, errorMessageOverride);
 
         return new ObjectResult(error)
         {
@@ -20,11 +20,11 @@ public static class IResponseExtensions
         };
     }
 
-    public static ActionResult<T> ToActionResult<T>(this IResponse<T> response)
+    public static ActionResult<T> ToActionResult<T>(this IResponse<T> response, string? errorMessageOverride = null)
     {
         var result = response.IsOk 
             ? new ObjectResult(response.Content) 
-            : new ObjectResult(new ErrorResultContent(response));
+            : new ObjectResult(new ErrorResultContent(response, errorMessageOverride));
 
         result.StatusCode = (int)response.ToStatusCode();
         return result;

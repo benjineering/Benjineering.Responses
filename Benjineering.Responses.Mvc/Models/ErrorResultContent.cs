@@ -12,10 +12,17 @@ public record ErrorResultContent
 
     public ErrorResultContent() { }
 
-    public ErrorResultContent(IResponse response)
+    public ErrorResultContent(IResponse response, string? errorMessageOverride)
     {
-        Message = response.Message;
-        Errors = response.Errors;
+        if (errorMessageOverride == null)
+        {
+            Message = response.Message;
+            Errors = response.Errors;
+            ValidationErrors = response.ValidationErrors;
+            return;
+        }
+
+        Message = errorMessageOverride;
         ValidationErrors = response.ValidationErrors;
     }
 }
