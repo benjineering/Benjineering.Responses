@@ -85,24 +85,24 @@ public record Response : IResponse
         return new Response<T>(ResponseType.BadRequest, DefaultBadRequestMessage, errors: null, validationErrors);
     }
 
-    public static Response NotSignedIn(string message)
+    public static Response NotSignedIn(string? message = null)
     {
-        return new Response(ResponseType.NotSignedIn, message);
+        return new Response(ResponseType.NotSignedIn, message ?? "Unauthorised");
     }
 
-    public static Response<T> NotSignedIn<T>(string message)
+    public static Response<T> NotSignedIn<T>(string? message = null)
     {
-        return new Response<T>(ResponseType.NotSignedIn, message);
+        return new Response<T>(ResponseType.NotSignedIn, message ?? "Unauthorised");
     }
 
-    public static Response NotPermitted(string message)
+    public static Response NotPermitted(string? message = null)
     {
-        return new Response(ResponseType.NotPermitted, message);
+        return new Response(ResponseType.NotPermitted, message ?? "Not allowed");
     }
 
-    public static Response<T> NotPermitted<T>(string message)
+    public static Response<T> NotPermitted<T>(string? message = null)
     {
-        return new Response<T>(ResponseType.NotPermitted, message);
+        return new Response<T>(ResponseType.NotPermitted, message ?? "Not allowed");
     }
 
     public static Response<T> FromResponse<T>(IResponse response)
