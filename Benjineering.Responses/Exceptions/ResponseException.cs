@@ -19,7 +19,7 @@ public class ResponseException : Exception
             var validationErrors = response.ValidationErrors
                 .Select(x => $"\n\t\t{x.PropertyName}: {string.Join(string.Empty, x.Errors.Select(x => $"\n\t\t\t{x.Message}"))}");
 
-            str += "\n\tValidationErrors:" + validationErrors;
+            str += "\n\tValidationErrors:" + string.Join(string.Empty, validationErrors);
         }
 
         if (response.Errors.Any())
@@ -27,7 +27,7 @@ public class ResponseException : Exception
             var errors = response.Errors
                 .Select(x => $"\n\t\t{x.Message}");
 
-            str += "\n\tErrors:" + errors;
+            str += "\n\tErrors:" + string.Join(string.Empty, errors);
         }
 
         return str;
