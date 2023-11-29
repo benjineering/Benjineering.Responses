@@ -128,5 +128,13 @@ public record Response<T> : Response, IResponse<T>
         : base(type, message, errors, validationErrors)
     {
         Content = content;
-    }
+	}
+
+	public new T EnsureSuccess(string? message)
+	{
+		if (!IsOk || Content is null)
+			throw new ResponseException(this, message);
+
+        return Content;
+	}
 }

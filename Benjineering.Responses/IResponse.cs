@@ -25,4 +25,6 @@ public interface IResponse
 public interface IResponse<T> : IResponse
 {
     T? Content { get; }
+
+	new T EnsureSuccess(string? message = null);
 }
